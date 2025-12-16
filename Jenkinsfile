@@ -35,9 +35,17 @@ pipeline{
          }
        }
      }
-	 stage('Push Image to ACS'){
+	 stage('Tag Image') {
+     steps {
+        sh '''
+          docker tag ${IMAGE_NAME}:${TAG} \
+          $ACR_LOGIN_SERVER/${IMAGE_NAME}:${TAG}
+        '''
+         }
+       }
+	 stage('Push Image to ACR'){
 	   steps{
-	    sh 'docker push devopsproject1.azurecr.io/boardgame:latest'
+	    sh 'docker push $ACR_LOGIN_SERVER/${IMAGE_NAME}:${TAG}'
 	    }
 	   }
 
