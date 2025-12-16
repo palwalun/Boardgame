@@ -48,7 +48,11 @@ pipeline{
 	    sh 'docker push $ACR_LOGIN_SERVER/${IMAGE_NAME}:${TAG}'
 	    }
 	   }
-
+     stage('Deploy the docker image to QA server'){
+       steps('Deploying to QA Server'){
+        sh 'ssh jenkins@10.0.0.4 ansible-playbook /home/jenkins/Myansible/boardapp.yml -b'
+          }
+         
    }
 
 
