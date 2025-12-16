@@ -8,16 +8,10 @@ pipeline{
 	 }
 	 stage('Contiuous Build'){
 	   steps{
-	   dir
 	    sh 'mvn clean package'
 	   }
 	 }
-	  stage('Build Docker Image'){
-	   steps{
-	   dir
-	    sh 'docker build -t boardgame:latest . '
-	   }
-	 }
+	  
    }
 
 
