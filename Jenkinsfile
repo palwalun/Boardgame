@@ -35,6 +35,11 @@ pipeline{
          }
        }
      }
+	 stage('Push Image to ACS'){
+	   steps{
+	    sh 'docker push devopsproject1.azurecr.io/boardgame:latest'
+	    }
+	   }
 
    }
 
