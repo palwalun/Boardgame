@@ -48,12 +48,24 @@ pipeline{
 	    sh 'docker push $ACR_LOGIN_SERVER/${IMAGE_NAME}:${TAG}'
 	    }
 	   }
-     stage('Deploy the docker image to QA server'){
-       steps('Deploying to QA Server'){
-        sh 'ssh jenkins@4.222.234.133 ansible-playbook /home/jenkins/Myansible/boardapp.yml -b'
-          }
-         
+     stage('Deploy the docker image to QA server') {
+      steps {
+       withCredentials([usernamePassword(
+       credentialsId: 'acr-creds',
+       usernameVariable: 'ACR_USER',
+       passwordVariable: 'ACR_PASS'
+       )]) {
+        sh '''
+          ssh jenkins@4.222.234.133 \
+          ansible-playbook /home/jenkins/Myansible/boardapp.yml \
+          -e acr_username=$ACR_USER \
+          -e acr_password=$ACR_PASS \
+          -b
+       '''
+         }
+       }
     }
+
 
 
   }
