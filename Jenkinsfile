@@ -53,7 +53,8 @@ pipeline{
         sh 'ssh jenkins@10.0.0.4 ansible-playbook /home/jenkins/Myansible/boardapp.yml -b'
           }
          
-   }
+    }
 
 
+  }
 }
