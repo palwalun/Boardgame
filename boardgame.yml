@@ -2,10 +2,15 @@
 - name: download customised docker image and create container on all QA servers
   hosts: all
   tasks:
-   - name: create container from the customised image
-     docker_container:
-	     name: boardgame
-	     image: devopsproject1.azurecr.io/boardgame:latest
-		   ports:
-		     - 8081:8080
-...
+    - name: Login to Azure Container Registry
+      docker_login:
+        registry_url: devopsproject1.azurecr.io
+        username: "{{ acr_username }}"
+        password: "{{ acr_password }}"
+
+    - name: create container from the customised image
+       docker_container:
+         name: boardgame
+         image: devopsproject1.azurecr.io/boardgame:latest
+         ports:
+           - 8081:8080
