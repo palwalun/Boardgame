@@ -11,7 +11,12 @@ pipeline{
 	    sh 'mvn clean package'
 	   }
 	 }
-	  
+	  stage('Build Docker Image'){
+	   steps{
+	   dir
+	    sh 'docker build -t boardgame:latest . '
+	   }
+	 }
    }
 
 
