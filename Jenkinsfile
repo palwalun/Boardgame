@@ -50,7 +50,7 @@ pipeline{
 	   }
      stage('Deploy the docker image to QA server'){
        steps('Deploying to QA Server'){
-        sh 'ssh jenkins@10.0.0.4 ansible-playbook /home/jenkins/Myansible/boardapp.yml -b'
+        sh 'ssh jenkins@4.222.234.133 ansible-playbook /home/jenkins/Myansible/boardapp.yml -b'
           }
          
     }
