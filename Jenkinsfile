@@ -65,6 +65,15 @@ pipeline{
          }
        }
     }
+	 stage('Deploy to k8s cluster'){
+	  steps{
+	   sh '''
+	    kubectl apply -f boardgame-deployment.yml
+		kubectl apply -f service.yml
+		'''
+	   }
+	  
+	 }
 
 
 
