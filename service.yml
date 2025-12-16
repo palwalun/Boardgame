@@ -1,0 +1,15 @@
+---
+apeVersion: v1
+kind: Service
+metadata:
+  name: boardgame-service 
+  labels:
+    app: boardgame
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: boardgame
+...
