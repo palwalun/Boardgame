@@ -1,5 +1,10 @@
 pipeline{
  agent any
+   environment {
+        ACR_LOGIN_SERVER = "devopsproject1.azurecr.io"
+        IMAGE_NAME = "boardgame"
+        TAG = "latest"
+    }
    stages{
      stage('Contiuous Download'){
 	   steps{
@@ -16,6 +21,8 @@ pipeline{
 	    sh 'docker build -t boardgame:latest . '
 	   }
 	 }
+	 
+
    }
 
 
