@@ -2,7 +2,7 @@ pipeline{
  agent any
    environment {
         ACR_LOGIN_SERVER = "devopsproject2.azurecr.io"
-        IMAGE_NAME = "boardgame"
+        IMAGE_NAME = "boardgame-app"
         TAG = "latest"
     }
    stages{
@@ -18,7 +18,7 @@ pipeline{
 	 }
 	  stage('Build Docker Image'){
 	   steps{
-	    sh 'docker build -t boardgame:latest . '
+	    sh 'docker build -t boardgame-app:latest . '
 	   }
 	 }
 	 stage('Login to ACR') {
