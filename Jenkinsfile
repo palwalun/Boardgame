@@ -1,14 +1,14 @@
 pipeline{
  agent any
    environment {
-        ACR_LOGIN_SERVER = "devopsproject1.azurecr.io"
+        ACR_LOGIN_SERVER = "devopsproject2.azurecr.io"
         IMAGE_NAME = "boardgame"
         TAG = "latest"
     }
    stages{
-     stage('Contiuous Download'){
+     stage('Checkout'){
 	   steps{
-	    git branch: 'main', url: 'https://github.com/palwalun/Boardgame.git'
+	    checkout scm
 	   }
 	 }
 	 stage('Contiuous Build'){
@@ -48,28 +48,11 @@ pipeline{
 	    sh 'docker push $ACR_LOGIN_SERVER/${IMAGE_NAME}:${TAG}'
 	    }
 	   }
-     stage('Deploy the docker image to QA server') {
-      steps {
-       withCredentials([usernamePassword(
-       credentialsId: 'acr-creds',
-       usernameVariable: 'ACR_USER',
-       passwordVariable: 'ACR_PASS'
-       )]) {
-        sh '''
-          ssh jenkins@4.222.234.133 \
-          ansible-playbook /home/jenkins/Myansible/boardapp.yml \
-          -e acr_username=$ACR_USER \
-          -e acr_password=$ACR_PASS \
-          -b
-       '''
-         }
-       }
-    }
 	 stage('Deploy to k8s cluster'){
 	  steps{
 	   sh '''
 	    kubectl apply -f boardgame-deployment.yml
-		kubectl apply -f service.yml
+		  kubectl apply -f service.yml
 		'''
 	   }
 	  
