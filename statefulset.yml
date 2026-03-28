@@ -32,9 +32,11 @@ spec:
             secretKeyRef:
               name: postgres-secret
               key: POSTGRES_PASSWORD
+        - name: PGDATA
+          value: /var/lib/postgresql/pgdata
       volumeMounts:
         - name: postgres-storage
-          mountPath: /var/lib/postgresql/data/pgdata
+          mountPath: /var/lib/postgresql/data
    volumes:
       - name: postgres-storage
         persistentVolumeClaim:
@@ -46,6 +48,8 @@ kind: Service
 metadata:
  name: db-service
  labels:
+  app: boardgame
+ selector:
   app: boardgame
 spec:
  type: ClusterIP
