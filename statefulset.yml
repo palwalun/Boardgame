@@ -5,7 +5,8 @@ metadata:
  labels:
   app: boardgame
 spec:
- replicas: 2
+ replicas: 1
+ serviceName: "db-service"
  selector:
   matchLabels:
    app: boardgame
