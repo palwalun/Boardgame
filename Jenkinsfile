@@ -54,6 +54,8 @@ pipeline{
 	    kubectl apply -f boardgame-deployment.yml
 		  kubectl apply -f service.yml
       kubectl apply -f ingress.yml
+      kubectl apply -f secret.yml
+      kubectl apply -f pvc.yml
 		'''
 	   }
 	  
