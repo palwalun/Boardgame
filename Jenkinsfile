@@ -56,6 +56,7 @@ pipeline{
       kubectl apply -f ingress.yml
       kubectl apply -f secrets.yml
       kubectl apply -f pvc.yml
+      kubectl apply -f statefulset.yml
 		'''
 	   }
 	  
