@@ -49,10 +49,10 @@ metadata:
  name: db-service
  labels:
   app: boardgame
- selector:
-  app: boardgame
 spec:
  type: ClusterIP
+ selector:
+  app: boardgame
  ports:
   - port: 5432
     targetPort: 5432
